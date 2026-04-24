@@ -11,20 +11,17 @@
         body { background: radial-gradient(circle, var(--deep-rose) 0%, var(--dark-red) 100%); height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; font-family: 'Poppins', sans-serif; }
         .heart-bg { position: absolute; color: var(--pink-neon); pointer-events: none; z-index: 1; animation: floatUp linear forwards; opacity: 0.5; }
         @keyframes floatUp { 0% { transform: translateY(110vh) rotate(0deg) scale(0.5); opacity: 0; } 100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; } }
-        .card { position: relative; z-index: 10; width: 88%; max-width: 380px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border-radius: 25px; padding: 35px 20px; text-align: center; border: 1px solid rgba(255, 77, 109, 0.3); box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); }
+        .card { position: relative; z-index: 10; width: 88%; max-width: 380px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border-radius: 25px; padding: 30px 20px; text-align: center; border: 1px solid rgba(255, 77, 109, 0.3); box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); }
         .name-label { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--pink-neon); margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
-        #typing-area { text-align: left; font-size: 0.95rem; line-height: 1.8; color: #f0f0f0; min-height: 220px; margin-bottom: 20px; }
+        #typing-area { text-align: left; font-size: 0.85rem; line-height: 1.6; color: #f0f0f0; min-height: 320px; margin-bottom: 20px; overflow-y: auto; padding-right: 5px; }
+        #typing-area::-webkit-scrollbar { width: 3px; }
+        #typing-area::-webkit-scrollbar-thumb { background: var(--pink-neon); border-radius: 10px; }
         .btn-start, .btn-next { background: var(--pink-neon); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); }
         .btn-next { display: none; background: transparent; border: 1px solid var(--pink-neon); color: var(--pink-neon); margin-top: 10px; }
-        #final-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-red); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        
-        /* ប៊ូតុងភ្លេងជំនួយ */
-        .music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255, 77, 109, 0.2); border: 1px solid var(--pink-neon); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
+        #final-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-red); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
-
-    <button class="music-control" onclick="toggleMusic()">Music: ON/OFF 🎵</button>
 
     <audio id="mySong" loop preload="auto">
         <source src="https://files.catbox.moe/6v0mms.mp3" type="audio/mpeg">
@@ -33,7 +30,7 @@
     <div class="card" id="main-card">
         <h1 class="name-label">Roth</h1>
         <div id="typing-area">
-            <p style="text-align: center; color: var(--pink-neon); margin-top: 60px;" id="hint">Click button to read... ❤️</p>
+            <p style="text-align: center; color: var(--pink-neon); margin-top: 100px;" id="hint">Click to read my heart... ❤️</p>
         </div>
         <button class="btn-start" id="start-btn" onclick="startEverything()">READ MY MESSAGE 🎵</button>
         <button class="btn-next" id="next-btn" onclick="showFinal()">NEXT</button>
@@ -41,25 +38,20 @@
 
     <div id="final-screen">
         <div style="font-size: 80px;">💖</div>
-        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--pink-neon); margin: 20px 0;">Roth, will you be mine?</h2>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: var(--pink-neon); margin: 20px 0;">Roth, will you be mine?</h2>
         <button class="btn-start" style="width: auto; padding: 10px 40px;" onclick="location.reload()">Back</button>
     </div>
 
     <script>
-        const message = "Hey Roth, I spent 4 days building this just to show you how much I care. I know in the past I was too young and made mistakes, but I've changed. My feelings for you have only grown stronger. I'm ready to be the man you deserve and I'll never let you go again. Will you give us one more chance?";
+        // សារចាស់ + សារថ្មីអំពីការខិតខំធ្វើកូដ ៤ ថ្ងៃ
+        const message = "Hey Roth, I spent 4 days building this just to show you how much I care. I know in the past I was too young and made mistakes, but I've changed. My feelings for you have only grown stronger. I'm ready to be the man you deserve and I'll never let you go again. Will you give us one more chance? \n\nI also want you to know that building this wasn't easy for me. I spent 4 nights learning how to code from scratch, staying up late to fix every error and trying to make the music work just for you. It was frustrating and I almost gave up many times, but the thought of you kept me going. I hope you can feel the effort I put into this. ❤️";
+        
         let i = 0;
-        const song = document.getElementById("mySong");
-
-        function toggleMusic() {
-            if (song.paused) { song.play(); } else { song.pause(); }
-        }
 
         function startEverything() {
+            const song = document.getElementById("mySong");
             song.volume = 0.5;
-            song.play().catch(e => {
-                console.log("Autoplay blocked, waiting for more interaction");
-                song.play(); 
-            });
+            song.play().catch(e => { song.play(); });
 
             document.getElementById('hint').style.display = 'none';
             document.getElementById('start-btn').style.display = 'none';
@@ -68,9 +60,13 @@
 
         function typeWriter() {
             if (i < message.length) {
-                document.getElementById("typing-area").innerHTML += message.charAt(i);
+                let char = message.charAt(i);
+                document.getElementById("typing-area").innerHTML += char === "\n" ? "<br>" : char;
                 i++;
-                setTimeout(typeWriter, 50);
+                // រមូរចុះក្រោមអូតូពេលអក្សរវែងពេក
+                const area = document.getElementById("typing-area");
+                area.scrollTop = area.scrollHeight;
+                setTimeout(typeWriter, 50); 
             } else {
                 document.getElementById('next-btn').style.display = 'block';
             }
