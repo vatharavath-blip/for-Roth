@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Roth ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --romantic-pink: #ff758c;
+            --deep-rose: #ff4b2b;
+            --soft-white: #fffcfc;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+        }
+
+        /* Animated Petals */
+        .petal {
+            position: absolute;
+            color: var(--romantic-pink);
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Elegant Card */
+        .glass-card {
+            position: relative;
+            z-index: 10;
+            width: 88%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--romantic-pink);
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(255, 117, 140, 0.5);
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #aaa;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .letter {
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 30px;
+            padding-right: 10px;
+        }
+
+        .letter b {
+            color: var(--romantic-pink);
+        }
+
+        .letter::-webkit-scrollbar { width: 3px; }
+        .letter::-webkit-scrollbar-thumb { background: var(--romantic-pink); }
+
+        .btn {
+            background: linear-gradient(45deg, var(--romantic-pink), var(--deep-rose));
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 75, 43, 0.3);
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        /* Reveal Overlay */
+        #reveal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .big-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: white;
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="reveal">
+        <div style="font-size: 70px; animation: pulse 2s infinite;">🌹</div>
+        <h1 class="big-text">Roth, can we finally fulfill that Grade 9 promise?</h1>
+        <p style="color: var(--romantic-pink); font-size: 1.1rem;">I'm ready when you are. ❤️</p>
+        <button class="btn" style="width: auto; margin-top: 50px; padding: 12px 40px;" onclick="location.reload()">Re-read</button>
+    </div>
+
+    <div class="glass-card">
+        <h1 class="name">Dear Roth</h1>
+        <p class="tagline">Since Grade 8</p>
+        
+        <div class="letter">
+            Hey <b>Roth</b>, <br><br>
+            I’ve been carrying a lot of memories in my heart since <b>Grade 8</b>. I know we were young back then, and I didn’t quite know how to be the man you deserved. But even through the distance and the time apart, I never forgot the way we were. <br><br>
+            I still remember what you told me in <b>Grade 9</b>—that you’d think about us again when the time was right. I’ve held onto those words for so long. They’ve been my motivation to grow, to learn, and to become someone better. <br><br>
+            I miss the laughs we shared and the way everything felt when we were together. I'm not that young kid anymore, but I'm still the person who cares for you more than anyone else ever could.
+        </div>
+
+        <button class="btn" onclick="openHeart()">Click to Open My Heart</button>
+    </div>
+
+    <script>
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.innerHTML = Math.random() > 0.5 ? '🌸' : '❤️';
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.fontSize = Math.random() * 15 + 10 + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 7000);
+        }
+        setInterval(createPetal, 350);
+
+        function openHeart() {
+            document.getElementById('reveal').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
