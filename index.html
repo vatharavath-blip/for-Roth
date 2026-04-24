@@ -17,9 +17,14 @@
         .btn-start, .btn-next { background: var(--pink-neon); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); }
         .btn-next { display: none; background: transparent; border: 1px solid var(--pink-neon); color: var(--pink-neon); margin-top: 10px; }
         #final-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-red); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        
+        /* ប៊ូតុងភ្លេងជំនួយ */
+        .music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255, 77, 109, 0.2); border: 1px solid var(--pink-neon); color: white; padding: 8px 12px; border-radius: 20px; font-size: 12px; cursor: pointer; }
     </style>
 </head>
 <body>
+
+    <button class="music-control" onclick="toggleMusic()">Music: ON/OFF 🎵</button>
 
     <audio id="mySong" loop preload="auto">
         <source src="https://files.catbox.moe/6v0mms.mp3" type="audio/mpeg">
@@ -28,14 +33,14 @@
     <div class="card" id="main-card">
         <h1 class="name-label">Roth</h1>
         <div id="typing-area">
-            <p style="text-align: center; color: var(--pink-neon); margin-top: 60px;" id="hint">Click to read my heart... ❤️</p>
+            <p style="text-align: center; color: var(--pink-neon); margin-top: 60px;" id="hint">Click button to read... ❤️</p>
         </div>
         <button class="btn-start" id="start-btn" onclick="startEverything()">READ MY MESSAGE 🎵</button>
         <button class="btn-next" id="next-btn" onclick="showFinal()">NEXT</button>
     </div>
 
     <div id="final-screen">
-        <div style="font-size: 80px; animation: pulse 1.5s infinite;">💖</div>
+        <div style="font-size: 80px;">💖</div>
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--pink-neon); margin: 20px 0;">Roth, will you be mine?</h2>
         <button class="btn-start" style="width: auto; padding: 10px 40px;" onclick="location.reload()">Back</button>
     </div>
@@ -43,20 +48,18 @@
     <script>
         const message = "Hey Roth, I spent 4 days building this just to show you how much I care. I know in the past I was too young and made mistakes, but I've changed. My feelings for you have only grown stronger. I'm ready to be the man you deserve and I'll never let you go again. Will you give us one more chance?";
         let i = 0;
+        const song = document.getElementById("mySong");
+
+        function toggleMusic() {
+            if (song.paused) { song.play(); } else { song.pause(); }
+        }
 
         function startEverything() {
-            const song = document.getElementById("mySong");
-            
-            // កំណត់សម្លេង ៥០% និងបង្ខំឱ្យលេង
             song.volume = 0.5;
-            
-            // ព្យាយាមលេងភ្លេងរហូតដល់ឮ
-            let playInterval = setInterval(() => {
-                song.play().then(() => {
-                    clearInterval(playInterval);
-                    console.log("Music is playing!");
-                }).catch(e => console.log("Waiting for interaction..."));
-            }, 300);
+            song.play().catch(e => {
+                console.log("Autoplay blocked, waiting for more interaction");
+                song.play(); 
+            });
 
             document.getElementById('hint').style.display = 'none';
             document.getElementById('start-btn').style.display = 'none';
