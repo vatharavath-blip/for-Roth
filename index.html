@@ -22,7 +22,7 @@
 <body>
 
     <audio id="mySong" loop preload="auto">
-        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/6v0mms.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card" id="main-card">
@@ -35,7 +35,7 @@
     </div>
 
     <div id="final-screen">
-        <div style="font-size: 80px;">💖</div>
+        <div style="font-size: 80px; animation: pulse 1.5s infinite;">💖</div>
         <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--pink-neon); margin: 20px 0;">Roth, will you be mine?</h2>
         <button class="btn-start" style="width: auto; padding: 10px 40px;" onclick="location.reload()">Back</button>
     </div>
@@ -47,14 +47,16 @@
         function startEverything() {
             const song = document.getElementById("mySong");
             
-            // ជំហានពិសេសដើម្បីបង្ខំឱ្យភ្លេងលេង (Volume 50%)
+            // កំណត់សម្លេង ៥០% និងបង្ខំឱ្យលេង
             song.volume = 0.5;
-            song.play().then(() => {
-                console.log("Playing...");
-            }).catch(e => {
-                // ប្រសិនបើអត់ឮទៀត យើងព្យាយាមលេងម្ដងទៀតដោយមិនកំណត់ Volume
-                song.play();
-            });
+            
+            // ព្យាយាមលេងភ្លេងរហូតដល់ឮ
+            let playInterval = setInterval(() => {
+                song.play().then(() => {
+                    clearInterval(playInterval);
+                    console.log("Music is playing!");
+                }).catch(e => console.log("Waiting for interaction..."));
+            }, 300);
 
             document.getElementById('hint').style.display = 'none';
             document.getElementById('start-btn').style.display = 'none';
