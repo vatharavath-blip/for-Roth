@@ -13,10 +13,10 @@
         @keyframes floatUp { 0% { transform: translateY(110vh) rotate(0deg) scale(0.5); opacity: 0; } 100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; } }
         .card { position: relative; z-index: 10; width: 88%; max-width: 380px; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(15px); border-radius: 25px; padding: 30px 20px; text-align: center; border: 1px solid rgba(255, 77, 109, 0.3); box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); }
         .name-label { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--pink-neon); margin-bottom: 5px; text-shadow: 0 0 10px rgba(255, 77, 109, 0.5); }
-        #typing-area { text-align: left; font-size: 0.85rem; line-height: 1.6; color: #f0f0f0; min-height: 320px; margin-bottom: 20px; overflow-y: auto; padding-right: 5px; }
+        #typing-area { text-align: left; font-size: 0.88rem; line-height: 1.7; color: #f0f0f0; min-height: 300px; margin-bottom: 20px; overflow-y: auto; padding-right: 5px; }
         #typing-area::-webkit-scrollbar { width: 3px; }
         #typing-area::-webkit-scrollbar-thumb { background: var(--pink-neon); border-radius: 10px; }
-        .btn-start, .btn-next { background: var(--pink-neon); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); }
+        .btn-start, .btn-next { background: var(--pink-neon); color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; width: 100%; box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); transition: 0.3s; }
         .btn-next { display: none; background: transparent; border: 1px solid var(--pink-neon); color: var(--pink-neon); margin-top: 10px; }
         #final-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-red); z-index: 100; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
     </style>
@@ -43,8 +43,8 @@
     </div>
 
     <script>
-        // សារចាស់ + សារថ្មីអំពីការខិតខំធ្វើកូដ ៤ ថ្ងៃ
-        const message = "Hey Roth, I spent 4 days building this just to show you how much I care. I know in the past I was too young and made mistakes, but I've changed. My feelings for you have only grown stronger. I'm ready to be the man you deserve and I'll never let you go again. Will you give us one more chance? \n\nI also want you to know that building this wasn't easy for me. I spent 4 nights learning how to code from scratch, staying up late to fix every error and trying to make the music work just for you. It was frustrating and I almost gave up many times, but the thought of you kept me going. I hope you can feel the effort I put into this. ❤️";
+        // សារដែលបញ្ជូលគ្នាបានយ៉ាងល្អ
+        const message = "Hey Roth, I spent 4 nights building this just to show you how much I care. Even though I didn't know anything about coding, I struggled and stayed up late every night, fixing countless errors and trying to make everything perfect for you. I know in the past I was too young and made mistakes, but those 4 days of hard work taught me how much you truly mean to me. Every time I felt like giving up, the thought of you kept me going. I've changed, and my feelings for you have only grown stronger. I'm ready to be the man you deserve and I'll never let you go again. Will you give us one more chance? ❤️";
         
         let i = 0;
 
@@ -60,10 +60,9 @@
 
         function typeWriter() {
             if (i < message.length) {
-                let char = message.charAt(i);
-                document.getElementById("typing-area").innerHTML += char === "\n" ? "<br>" : char;
+                document.getElementById("typing-area").innerHTML += message.charAt(i);
                 i++;
-                // រមូរចុះក្រោមអូតូពេលអក្សរវែងពេក
+                // ឱ្យវា Scroll ចុះក្រោមអូតូពេលអក្សរវែង
                 const area = document.getElementById("typing-area");
                 area.scrollTop = area.scrollHeight;
                 setTimeout(typeWriter, 50); 
